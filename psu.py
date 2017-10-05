@@ -1,6 +1,7 @@
 import telnetlib
 import time
 import config
+import tkinter
 
 
 class PSU:
@@ -51,7 +52,10 @@ class PSU:
         self.send(config.TURN_OFF)
 
     def set_voltage(self, v):
-        self.send("{} {}".format(config.SET_VOLTAGE, v))
+        self.send("{} {:.2f}".format(config.SET_VOLTAGE, v))
 
     def set_current_limit(self, i):
-        self.send("{} {}".format(config.SET_CURRENT_LIMIT, i))
+        self.send("{} {:.2f}".format(config.SET_CURRENT_LIMIT, i))
+
+    def start_ramp(self, i):
+        self.send("{} {:.2f}".format(config.SET_CURRENT_LIMIT, i))
