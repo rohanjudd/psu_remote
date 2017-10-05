@@ -18,6 +18,7 @@ def main():
     print("8. Ramp")
     print("9. Quit")
 
+
     while True:
         inp = input(":> ")
         if inp == "1":
