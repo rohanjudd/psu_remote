@@ -15,11 +15,12 @@ class PSU:
 
     def send(self, message):
         print("sending: {}".format(message))
-        self.tel.write(message)
+        self.tel.write(message.encode())
+        #self.tel.write('/n'.encode())
 
     def read(self):
         try:
-            return self.tel.read_eager.strip()
+            return self.tel.read_eager().decode("utf-8").strip()
         except EOFError:
             return "EOFError"
 
@@ -31,12 +32,12 @@ class PSU:
     def get_voltage(self):
         self.send(config.GET_VOLTAGE)
         time.sleep(0.1)
-        return self.read() + " V"
+        return self.read()
 
     def get_current(self):
         self.send(config.GET_CURRENT)
         time.sleep(0.1)
-        return self.read() + "mA"
+        return self.read()
 
     def is_on(self):
         self.send(config.IS_ON)
@@ -50,7 +51,7 @@ class PSU:
         self.send(config.TURN_OFF)
 
     def set_voltage(self, v):
-        self.send(config.SET_VOLTAGE + v)
+        self.send("{} {}".format(config.SET_VOLTAGE, v))
 
     def set_current_limit(self, i):
-        self.send(config.SET_CURRENT_LIMIT + i)
+        self.send("{} {}".format(config.SET_CURRENT_LIMIT, i))
