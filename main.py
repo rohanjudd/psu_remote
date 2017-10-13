@@ -40,7 +40,7 @@ def main():
             while v < 3.9:
                 psu.set_voltage(v)
                 v += 0.01
-                time.sleep(0.1)
+                time.sleep(0.02)
         elif inp == "9":
             psu.disconnect()
             quit()
